@@ -233,3 +233,4 @@ if __name__ == "__main__":
                     [2,8,6],
                     [5,7,0]]
     eight_puzzle(current_state)
+    time.sleep(3)
