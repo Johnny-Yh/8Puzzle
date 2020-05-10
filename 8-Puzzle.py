@@ -70,31 +70,18 @@ class Board:
                 if number==goal_state[i][j]:
                     return i,j
 
-    #对节点n中将牌排列顺序的计分,判断两个数字的顺序是否与目标状态一致
-    def GetOrder(self,number1,number2):
-        global goal_state
-        coor1=self.GetGoalIndex(number1)#第一个数的坐标
-        coor2=self.GetGoalIndex(number2)#后继者的坐标
-        if coor1[0]<coor2[0]:
-            return True
-        elif coor1[0] == coor2[0]:
-            if coor1[1]<coor2[1]:
-                return True
-            else:
-                return False
-        elif coor1[0]>coor2[0]:
-            return False
-    
     #判断两个数字的顺序是否与目标状态一致
-    def getScore(self,somelist):
+    def GetScore(self,number):
+        #把curlist转化成一个一维列表，方便比较
         temp=[]
-        for i in range(len(somelist)):
-            temp+=somelist[i]
-        for i in range(len(temp)):
-            if self.goalstate.index(temp[i]) <self.goalstate.index(temp[(i+1)%9]):
-                return True
-            else:
-                return False
+        for i in range(len(self.curList)):
+            temp+=self.curList[i]
+
+        i=temp.index(number)
+        if self.goalstate.index(temp[0]) <self.goalstate.index(temp[(0+1)%9]):
+            return True
+        else:
+            return False
         
     #获取到目标节点的耗散值
     #h(n)=P(n)+3S(n)
@@ -120,7 +107,7 @@ class Board:
                     else:
                         sn+=1#有将牌估分取1
                 else:
-                    if self.getScore(self.curList):
+                    if self.GetScore(self.curList[i][j]):
                         pass#一致估分取0
                     else:
                         sn+=2#不一致估分取2
