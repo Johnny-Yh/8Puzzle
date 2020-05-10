@@ -229,9 +229,17 @@ def eight_puzzle(curList):
 
 #main函数
 if __name__ == "__main__":
-    #初始状态
+    #定义初始状态
     current_state = [[1,3,4],
                     [2,8,6],
                     [5,7,0]]
+    print('初始状态：')
+    for i in range(len(current_state)):
+        print(current_state[i])
+    print('目标状态：')
+    for i in range(len(goal_state)):
+        print(goal_state[i])
+    print('开始求解：')
+    #开始求解
     eight_puzzle(current_state)
     time.sleep(3)
