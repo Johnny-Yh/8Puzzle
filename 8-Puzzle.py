@@ -131,6 +131,23 @@ class Board:
 def searchKey(elem):
     return elem.Cost
 
+#判断目标是否可达
+def checkNoAns(list):
+    sum = 0
+    for i in range(0, len(list), 1):
+        for j in range(0, len(list[i]), 1):
+            for ii in range(0, i, 1):
+                for jj in range(0, len(list[i]), 1):
+                    if list[ii][jj] != 0 and list[i][j] != 0 and list[ii][jj] < list[i][j]:
+                        sum += 1
+            for jj in range(0, j, 1):
+                if list[i][jj] != 0 and list[i][j] != 0 and list[i][jj] < list[i][j]:
+                    sum += 1
+    if sum % 2 == 0:
+        return True
+    else:
+        return False
+
 #解决八数码问题
 def eight_puzzle(curList):
     startNum = Board(curList, [], 0)
@@ -239,7 +256,12 @@ if __name__ == "__main__":
     print('目标状态：')
     for i in range(len(goal_state)):
         print(goal_state[i])
-    print('开始求解：')
+    #判断是否可达
+    if(checkNoAns(goal_state) == False):
+        print("目标不可达！")
+        exit(1)
+    else:
+        print('目标可达，开始求解')
     #开始求解
     eight_puzzle(current_state)
     time.sleep(3)
