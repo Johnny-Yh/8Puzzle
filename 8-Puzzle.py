@@ -77,7 +77,7 @@ class Board:
         for i in range(len(self.curList)):
             temp+=self.curList[i]
 
-        i=temp.index(number)
+        #i=temp.index(number)
         if self.goalstate.index(temp[0]) <self.goalstate.index(temp[(0+1)%9]):
             return True
         else:
